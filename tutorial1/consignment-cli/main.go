@@ -1,7 +1,7 @@
 package main
 
 import (
-	pb "go-microservices-tutorials/tutorial1/consignment-service/proto/consignment"
+	pb "github.com/funyug/go-microservices-tutorials/tutorial1/consignment-service/proto/consignment"
 	"io/ioutil"
 	"encoding/json"
 	"google.golang.org/grpc"

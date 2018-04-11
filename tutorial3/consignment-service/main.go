@@ -1,7 +1,7 @@
 package main
 
 import (
-	pb "github.com/funyug/go-microservices-tutorials/tutorial2/consignment-service/proto/consignment"
+	pb "github.com/funyug/go-microservices-tutorials/tutorial3/consignment-service/proto/consignment"
 	vesselProto "github.com/EwanValentine/shippy/vessel-service/proto/vessel"
 	"github.com/micro/go-micro"
 	"context"

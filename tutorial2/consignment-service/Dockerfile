@@ -1,6 +1,6 @@
 FROM golang:1.9.0 as builder
 
-WORKDIR /go/src/go-microservices-tutorials/tutorial2/consignment-service
+WORKDIR /go/src/github.com/funyug/go-microservices-tutorials/tutorial2/consignment-service
 
 COPY . .
 
@@ -17,6 +17,6 @@ RUN apk --no-cache add ca-certificates
 RUN mkdir /app
 WORKDIR /app
 
-COPY --from=builder /go/src/go-microservices-tutorials/tutorial2/consignment-service .
+COPY --from=builder /go/src/github.com/funyug/go-microservices-tutorials/tutorial2/consignment-service .
 
 CMD ["./consignment-service"]

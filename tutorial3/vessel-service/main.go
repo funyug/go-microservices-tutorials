@@ -1,7 +1,7 @@
 package main
 
 import (
-	pb "github.com/funyug/go-microservices-tutorials/tutorial2/vessel-service/proto/vessel"
+	pb "github.com/funyug/go-microservices-tutorials/tutorial3/vessel-service/proto/vessel"
 	"errors"
 	"context"
 	"github.com/micro/go-micro"

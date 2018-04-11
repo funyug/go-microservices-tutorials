@@ -1,6 +1,6 @@
 FROM golang:1.9.0 as builder
 
-WORKDIR /go/src/github.com/funyug/go-microservices-tutorials/tutorial2/vessel-service
+WORKDIR /go/src/github.com/funyug/go-microservices-tutorials/tutorial3/vessel-service
 
 COPY . .
 
@@ -16,6 +16,6 @@ RUN mkdir /app
 
 WORKDIR /app
 
-COPY --from=builder /go/src/github.com/funyug/go-microservices-tutorials/tutorial2/vessel-service .
+COPY --from=builder /go/src/github.com/funyug/go-microservices-tutorials/tutorial3/vessel-service .
 
 CMD ["./vessel-service"]

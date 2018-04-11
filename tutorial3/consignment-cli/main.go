@@ -1,12 +1,12 @@
 package main
 
 import (
-	pb "github.com/funyug/go-microservices-tutorials/tutorial2/consignment-service/proto/consignment"
+	pb "github.com/funyug/go-microservices-tutorials/tutorial3/consignment-service/proto/consignment"
 	microclient "github.com/micro/go-micro/client"
 	"io/ioutil"
 	"encoding/json"
 	"log"
-	//"os"
+	"os"
 	"context"
 	"github.com/micro/go-micro/cmd"
 )
@@ -31,9 +31,9 @@ func main() {
 	client := pb.NewShippingServiceClient("go.micro.srv.consignment", microclient.DefaultClient)
 
 	file := defaultFilename
-	/*if len(os.Args) > 1 {
+	if len(os.Args) > 1 {
 		file = os.Args[1]
-	}*/
+	}
 
 	consignment, err := parseFile(file)
 	if err != nil {
