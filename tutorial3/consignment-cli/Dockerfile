@@ -19,4 +19,4 @@ WORKDIR /app
 
 COPY --from=builder /go/src/github.com/funyug/go-microservices-tutorials/tutorial3/consignment-cli .
 
-CMD ["./consignment-service"]
+CMD ["./consignment-cli"]
