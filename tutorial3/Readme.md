@@ -1,1 +1,1 @@
-Tutorial: https://ewanvalentine.io/microservices-in-golang-part-2/
+Tutorial: https://ewanvalentine.io/microservices-in-golang-part-3/
