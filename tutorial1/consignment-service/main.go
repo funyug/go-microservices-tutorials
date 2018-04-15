@@ -1,12 +1,12 @@
 package main
 
 import (
-	pb "github.com/funyug/go-microservices-tutorials/tutorial1/consignment-service/proto/consignment"
 	"context"
-	"net"
-	"log"
+	pb "github.com/funyug/go-microservices-tutorials/tutorial1/consignment-service/proto/consignment"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
+	"log"
+	"net"
 )
 
 const (
@@ -14,7 +14,7 @@ const (
 )
 
 type IRepository interface {
-	Create(*pb.Consignment) (*pb.Consignment,error)
+	Create(*pb.Consignment) (*pb.Consignment, error)
 	GetAll() []*pb.Consignment
 }
 
@@ -24,8 +24,8 @@ type Repository struct {
 	consignments []*pb.Consignment
 }
 
-func (repo *Repository) Create(consignment *pb.Consignment) (*pb.Consignment,error) {
-	updated := append(repo.consignments,consignment)
+func (repo *Repository) Create(consignment *pb.Consignment) (*pb.Consignment, error) {
+	updated := append(repo.consignments, consignment)
 	repo.consignments = updated
 	return consignment, nil
 }
@@ -33,7 +33,6 @@ func (repo *Repository) Create(consignment *pb.Consignment) (*pb.Consignment,err
 func (repo *Repository) GetAll() []*pb.Consignment {
 	return repo.consignments
 }
-
 
 // Service should implement all of the methods to satisfy the service
 // we defined in our protobuf definition. You can check the interface
@@ -49,7 +48,7 @@ func (s *service) CreateConsignment(ctx context.Context, req *pb.Consignment) (*
 		return nil, err
 	}
 
-	return &pb.Response{Created:true,Consignment:consignment},nil
+	return &pb.Response{Created: true, Consignment: consignment}, nil
 }
 
 func (s *service) GetConsignments(ctx context.Context, req *pb.GetRequest) (*pb.Response, error) {
@@ -60,7 +59,7 @@ func (s *service) GetConsignments(ctx context.Context, req *pb.GetRequest) (*pb.
 func main() {
 	repo := &Repository{}
 
-	lis, err := net.Listen("tcp",port)
+	lis, err := net.Listen("tcp", port)
 	if err != nil {
 		log.Fatalf("Failed to listen : %v", err)
 	}
@@ -70,6 +69,6 @@ func main() {
 
 	reflection.Register(s)
 	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v",err)
+		log.Fatalf("failed to serve: %v", err)
 	}
 }

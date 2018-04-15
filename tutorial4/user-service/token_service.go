@@ -1,8 +1,8 @@
 package main
 
 import (
-	pb "github.com/funyug/go-microservices-tutorials/tutorial4/user-service/proto/user"
 	"github.com/dgrijalva/jwt-go"
+	pb "github.com/funyug/go-microservices-tutorials/tutorial4/user-service/proto/user"
 	"time"
 )
 
@@ -16,8 +16,8 @@ type CustomClaims struct {
 }
 
 type Authable interface {
-	Decode(token string) (interface{},error)
-	Encode(user *pb.User)(string,error)
+	Decode(token string) (interface{}, error)
+	Encode(user *pb.User) (string, error)
 }
 
 type TokenService struct {
@@ -25,7 +25,7 @@ type TokenService struct {
 }
 
 func (srv *TokenService) Decode(tokenString string) (interface{}, error) {
-	token,err := jwt.ParseWithClaims(tokenString, &CustomClaims{}, func(token *jwt.Token) (interface{}, error){
+	token, err := jwt.ParseWithClaims(tokenString, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return key, nil
 	})
 
@@ -43,7 +43,7 @@ func (srv *TokenService) Encode(user *pb.User) (string, error) {
 		user,
 		jwt.StandardClaims{
 			ExpiresAt: expireToken,
-			Issuer:"go.micro.srv.user",
+			Issuer:    "go.micro.srv.user",
 		},
 	}
 

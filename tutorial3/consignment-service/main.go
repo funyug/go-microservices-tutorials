@@ -1,12 +1,12 @@
 package main
 
 import (
-	"os"
-	"log"
-	"github.com/micro/go-micro"
-	vesselProto "github.com/funyug/go-microservices-tutorials/tutorial3/vessel-service/proto/vessel"
-	pb "github.com/funyug/go-microservices-tutorials/tutorial3/consignment-service/proto/consignment"
 	"fmt"
+	pb "github.com/funyug/go-microservices-tutorials/tutorial3/consignment-service/proto/consignment"
+	vesselProto "github.com/funyug/go-microservices-tutorials/tutorial3/vessel-service/proto/vessel"
+	"github.com/micro/go-micro"
+	"log"
+	"os"
 )
 
 const (
@@ -20,12 +20,12 @@ func main() {
 		host = defaultHost
 	}
 
-	session,err := CreateSession(host)
+	session, err := CreateSession(host)
 
 	defer session.Close()
 
 	if err != nil {
-		log.Panicf("Could not connect to database with host %s - %v",host,err)
+		log.Panicf("Could not connect to database with host %s - %v", host, err)
 	}
 
 	srv := micro.NewService(
@@ -38,7 +38,7 @@ func main() {
 
 	pb.RegisterShippingServiceHandler(srv.Server(), &service{session, vesselClient})
 
-	if err := srv.Run();err != nil {
+	if err := srv.Run(); err != nil {
 		fmt.Println(err)
 	}
 }

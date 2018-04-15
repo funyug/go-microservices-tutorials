@@ -1,11 +1,11 @@
 package main
 
 import (
+	"context"
 	pb "github.com/funyug/go-microservices-tutorials/tutorial3/consignment-service/proto/consignment"
 	vesselProto "github.com/funyug/go-microservices-tutorials/tutorial3/vessel-service/proto/vessel"
-	"context"
-	"log"
 	"gopkg.in/mgo.v2"
+	"log"
 )
 
 // Service should implement all of the methods to satisfy the service
@@ -13,7 +13,7 @@ import (
 // in the generated code itself for the exact method signatures etc
 // to give you a better idea.
 type service struct {
-	session *mgo.Session
+	session      *mgo.Session
 	vesselClient vesselProto.VesselServiceClient
 }
 
@@ -25,14 +25,14 @@ func (s *service) CreateConsignment(ctx context.Context, req *pb.Consignment, re
 	repo := s.GetRepo()
 	defer repo.Close()
 
-	vesselResponse,err := s.vesselClient.FindAvailable(context.Background(),&vesselProto.Specification{
-		MaxWeight:req.Weight,
-		Capacity:int32(len(req.Containers)),
+	vesselResponse, err := s.vesselClient.FindAvailable(context.Background(), &vesselProto.Specification{
+		MaxWeight: req.Weight,
+		Capacity:  int32(len(req.Containers)),
 	})
 	if err != nil {
 		return err
 	}
-	log.Printf("Found vessel: %s \n",vesselResponse.Vessel.Name)
+	log.Printf("Found vessel: %s \n", vesselResponse.Vessel.Name)
 
 	req.VesselId = vesselResponse.Vessel.Id
 
@@ -49,7 +49,7 @@ func (s *service) CreateConsignment(ctx context.Context, req *pb.Consignment, re
 func (s *service) GetConsignments(ctx context.Context, req *pb.GetRequest, res *pb.Response) error {
 	repo := s.GetRepo()
 	defer repo.Close()
-	consignments,err := repo.GetAll()
+	consignments, err := repo.GetAll()
 	if err != nil {
 		return err
 	}

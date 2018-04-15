@@ -1,10 +1,10 @@
 package main
 
 import (
-	pb "github.com/funyug/go-microservices-tutorials/tutorial4/user-service/proto/user"
-	"log"
-	"github.com/micro/go-micro"
 	"fmt"
+	pb "github.com/funyug/go-microservices-tutorials/tutorial4/user-service/proto/user"
+	"github.com/micro/go-micro"
+	"log"
 )
 
 func main() {
@@ -30,7 +30,7 @@ func main() {
 
 	srv.Init()
 
-	pb.RegisterUserServiceHandler(srv.Server(), &service{repo,tokenService})
+	pb.RegisterUserServiceHandler(srv.Server(), &service{repo, tokenService})
 
 	if err := srv.Run(); err != nil {
 		fmt.Println(err)

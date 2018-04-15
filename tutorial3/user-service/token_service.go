@@ -1,8 +1,8 @@
 package main
 
 type Authable interface {
-	Decode(token string) (interface{},error)
-	Encode(data interface{})(string,error)
+	Decode(token string) (interface{}, error)
+	Encode(data interface{}) (string, error)
 }
 
 type TokenService struct {

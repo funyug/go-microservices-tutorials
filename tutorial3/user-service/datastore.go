@@ -1,10 +1,10 @@
 package main
 
 import (
-	_ "github.com/jinzhu/gorm/dialects/postgres"
-	"github.com/jinzhu/gorm"
-	"os"
 	"fmt"
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"os"
 )
 
 func CreateConnection() (*gorm.DB, error) {
@@ -18,6 +18,6 @@ func CreateConnection() (*gorm.DB, error) {
 		fmt.Sprintf(
 			"host=%s user=%s dbname=%s sslmode=disable password=%s",
 			host, user, DBName, password,
-			),
+		),
 	)
 }

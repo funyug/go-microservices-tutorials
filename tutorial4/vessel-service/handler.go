@@ -1,8 +1,8 @@
 package main
 
 import (
-	pb "github.com/funyug/go-microservices-tutorials/tutorial4/vessel-service/proto/vessel"
 	"context"
+	pb "github.com/funyug/go-microservices-tutorials/tutorial4/vessel-service/proto/vessel"
 	"gopkg.in/mgo.v2"
 )
 
@@ -18,7 +18,7 @@ func (s *service) FindAvailable(ctx context.Context, req *pb.Specification, res 
 	repo := s.GetRepo()
 	defer repo.Close()
 
-	vessel,err := repo.FindAvailable(req)
+	vessel, err := repo.FindAvailable(req)
 	if err != nil {
 		return err
 	}
@@ -30,10 +30,10 @@ func (s *service) Create(ctx context.Context, req *pb.Vessel, res *pb.Response) 
 	repo := s.GetRepo()
 	defer repo.Close()
 
-	if err := repo.Create(req);err!=nil {
+	if err := repo.Create(req); err != nil {
 		return err
 	}
 	res.Vessel = req
-	res.Created = true;
+	res.Created = true
 	return nil
 }

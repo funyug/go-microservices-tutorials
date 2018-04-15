@@ -1,11 +1,11 @@
 package main
 
 import (
-	pb "github.com/funyug/go-microservices-tutorials/tutorial3/vessel-service/proto/vessel"
-	"os"
-	"log"
-	"github.com/micro/go-micro"
 	"fmt"
+	pb "github.com/funyug/go-microservices-tutorials/tutorial3/vessel-service/proto/vessel"
+	"github.com/micro/go-micro"
+	"log"
+	"os"
 )
 
 const (
@@ -32,7 +32,7 @@ func main() {
 
 	session, err := CreateSession(host)
 	if err != nil {
-		log.Fatalf("Error connecting to datastore %v",err)
+		log.Fatalf("Error connecting to datastore %v", err)
 	}
 
 	repo := &VesselRepository{session.Copy()}

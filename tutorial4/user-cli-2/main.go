@@ -1,12 +1,12 @@
 package main
 
 import (
+	"context"
 	pb "github.com/funyug/go-microservices-tutorials/tutorial4/user-service/proto/user"
+	"github.com/micro/cli"
+	"github.com/micro/go-micro"
 	microclient "github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/cmd"
-	"github.com/micro/go-micro"
-	"github.com/micro/cli"
-	"context"
 	"log"
 	"os"
 )
@@ -14,24 +14,24 @@ import (
 func main() {
 	cmd.Init()
 
-	client := pb.NewUserServiceClient("go.micro.srv.user",microclient.DefaultClient)
+	client := pb.NewUserServiceClient("go.micro.srv.user", microclient.DefaultClient)
 	service := micro.NewService(
 		micro.Flags(
 			cli.StringFlag{
-				Name: "name",
+				Name:  "name",
 				Usage: "Your full name",
 			},
 			cli.StringFlag{
-				Name: "email",
+				Name:  "email",
 				Usage: "Your email",
 			},
 			cli.StringFlag{
-				Name:"password",
-				Usage:"Your password",
+				Name:  "password",
+				Usage: "Your password",
 			},
 			cli.StringFlag{
-				Name:"company",
-				Usage:"Your company",
+				Name:  "company",
+				Usage: "Your company",
 			},
 		),
 	)
@@ -46,21 +46,21 @@ func main() {
 			password := c.String("password")
 
 			r, err := client.Create(context.TODO(), &pb.User{
-				Name: name,
-				Email: email,
+				Name:     name,
+				Email:    email,
 				Password: password,
-				Company: company,
+				Company:  company,
 			})
 			if err != nil {
-				log.Fatalf("Could not create: %v",err)
+				log.Fatalf("Could not create: %v", err)
 			}
-			log.Printf("Created: %s",r.User.Id)
+			log.Printf("Created: %s", r.User.Id)
 
 			getAll, err := client.GetAll(context.Background(), &pb.Request{})
 			if err != nil {
-				log.Fatalf("Could not list users: %v",err)
+				log.Fatalf("Could not list users: %v", err)
 			}
-			for _,v := range getAll.Users {
+			for _, v := range getAll.Users {
 				log.Println(v)
 			}
 

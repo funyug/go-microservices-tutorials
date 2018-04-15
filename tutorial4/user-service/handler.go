@@ -1,14 +1,14 @@
 package main
 
 import (
-	pb "github.com/funyug/go-microservices-tutorials/tutorial4/user-service/proto/user"
 	"context"
-	"log"
+	pb "github.com/funyug/go-microservices-tutorials/tutorial4/user-service/proto/user"
 	"golang.org/x/crypto/bcrypt"
+	"log"
 )
 
 type service struct {
-	repo Repository
+	repo         Repository
 	tokenService Authable
 }
 
@@ -31,8 +31,8 @@ func (srv *service) GetAll(ctx context.Context, req *pb.Request, res *pb.Respons
 }
 
 func (srv *service) Auth(ctx context.Context, req *pb.User, res *pb.Token) error {
-	log.Println("Logging in with: ",req.Email, req.Password)
-	user,err := srv.repo.GetByEmail(req.Email)
+	log.Println("Logging in with: ", req.Email, req.Password)
+	user, err := srv.repo.GetByEmail(req.Email)
 	log.Println(user)
 	if err != nil {
 		return err
@@ -42,7 +42,7 @@ func (srv *service) Auth(ctx context.Context, req *pb.User, res *pb.Token) error
 		return err
 	}
 
-	token,err := srv.tokenService.Encode(user)
+	token, err := srv.tokenService.Encode(user)
 	if err != nil {
 		return err
 	}
@@ -51,7 +51,7 @@ func (srv *service) Auth(ctx context.Context, req *pb.User, res *pb.Token) error
 }
 
 func (srv *service) Create(ctx context.Context, req *pb.User, res *pb.Response) error {
-	hashedPass, err := bcrypt.GenerateFromPassword([]byte(req.Password),bcrypt.DefaultCost)
+	hashedPass, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
 	if err != nil {
 		return err
 	}

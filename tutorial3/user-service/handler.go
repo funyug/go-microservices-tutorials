@@ -1,12 +1,12 @@
 package main
 
 import (
-	pb "github.com/funyug/go-microservices-tutorials/tutorial3/user-service/proto/user"
 	"context"
+	pb "github.com/funyug/go-microservices-tutorials/tutorial3/user-service/proto/user"
 )
 
 type service struct {
-	repo Repository
+	repo         Repository
 	tokenService Authable
 }
 
@@ -29,7 +29,7 @@ func (srv *service) GetAll(ctx context.Context, req *pb.Request, res *pb.Respons
 }
 
 func (srv *service) Auth(ctx context.Context, req *pb.User, res *pb.Token) error {
-	_,err := srv.repo.GetByEmailAndPassword(req)
+	_, err := srv.repo.GetByEmailAndPassword(req)
 	if err != nil {
 		return err
 	}

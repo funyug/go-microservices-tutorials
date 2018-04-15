@@ -7,12 +7,12 @@ import (
 )
 
 const (
-	dbName = "shippy"
+	dbName           = "shippy"
 	vesselCollection = "vessels"
 )
 
 type Repository interface {
-	FindAvailable(*pb.Specification) (*pb.Vessel,error)
+	FindAvailable(*pb.Specification) (*pb.Vessel, error)
 	Create(vessel *pb.Vessel) error
 	Close()
 }
@@ -24,11 +24,11 @@ type VesselRepository struct {
 func (repo *VesselRepository) FindAvailable(spec *pb.Specification) (*pb.Vessel, error) {
 	var vessel *pb.Vessel
 	err := repo.collection().Find(bson.M{
-	"capacity":bson.M{"$gte": spec.Capacity},
-	"maxweight":bson.M{"$gte": spec.MaxWeight},
+		"capacity":  bson.M{"$gte": spec.Capacity},
+		"maxweight": bson.M{"$gte": spec.MaxWeight},
 	}).One(&vessel)
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
 	return vessel, err
 }
