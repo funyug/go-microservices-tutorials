@@ -30,9 +30,9 @@ func main() {
 
 	srv.Init()
 
-	pubsub := srv.Server().Options().Broker
+	publisher := micro.NewPublisher("user.created", srv.Client())
 
-	pb.RegisterUserServiceHandler(srv.Server(), &service{repo, tokenService, pubsub})
+	pb.RegisterUserServiceHandler(srv.Server(), &service{repo, tokenService, publisher})
 
 	if err := srv.Run(); err != nil {
 		fmt.Println(err)
