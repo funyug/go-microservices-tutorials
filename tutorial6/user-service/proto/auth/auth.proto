@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package auth;
+
 service Auth {
     rpc Create(User) returns (Response) {}
     rpc Get(User) returns (Response) {}
@@ -11,8 +13,8 @@ service Auth {
 message User {
     string id = 1;
     string name = 2;
-    string email = 3;
-    string company = 4;
+    string company = 3;
+    string email = 4;
     string password = 5;
 }
 

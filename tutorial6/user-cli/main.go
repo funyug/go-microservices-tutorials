@@ -21,7 +21,7 @@ func main() {
 	// Init will parse the command line flags.
 	srv.Init()
 
-	client := pb.NewAuthClient("go.micro.srv.user", microclient.DefaultClient)
+	client := pb.NewAuthClient("shippy.auth", microclient.DefaultClient)
 
 	name := "Ewan Valentine"
 	email := "ewan.valentine89@gmail.com"

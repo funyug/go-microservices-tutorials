@@ -5,7 +5,7 @@ import (
 	"github.com/satori/go.uuid"
 )
 
-func (model *Auth) BeforeCreate(scope *gorm.Scope) error {
+func (model *User) BeforeCreate(scope *gorm.Scope) error {
 	uuid := uuid.NewV4()
 	return scope.SetColumn("Id", uuid.String())
 }

@@ -1,12 +1,12 @@
-FROM golang:1.9.0 as builder
+#FROM golang:1.9.0 as builder
 
-WORKDIR /go/src/github.com/funyug/go-micro-services-tutorials/tutorial6/user-cli
+#WORKDIR /go/src/github.com/funyug/go-micro-services-tutorials/tutorial6/user-cli
 
-COPY . .
+#COPY . .
 
-RUN go get -u github.com/golang/dep/cmd/dep
-RUN dep init && dep ensure
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo .
+#RUN go get -u github.com/golang/dep/cmd/dep
+#RUN dep init && dep ensure
+#RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo .
 
 
 FROM alpine:latest
@@ -15,8 +15,8 @@ RUN apk --no-cache add ca-certificates
 
 RUN mkdir /app
 WORKDIR /app
-COPY --from=builder /go/src/github.com/funyug/go-micro-services-tutorials/tutorial6/user-cli .
-
+#COPY --from=builder /go/src/github.com/funyug/go-micro-services-tutorials/tutorial6/user-cli .
+COPY . .
 ENTRYPOINT ["./user-cli"]
 
 CMD ["./user-cli"]

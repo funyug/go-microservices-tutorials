@@ -1,6 +1,6 @@
 build:
+	GOOS=linux GOARCH=amd64 go build
 	docker build -t email-service .
-
 run:
 	docker run --net="host" \
 		-p 50054 \

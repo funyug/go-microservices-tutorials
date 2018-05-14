@@ -30,7 +30,7 @@ func main() {
 
 	srv.Init()
 
-	//publisher := micro.NewPublisher("user.created", srv.Client())
+	publisher := micro.NewPublisher("user.created", srv.Client())
 
 	pb.RegisterAuthHandler(srv.Server(), &service{repo, tokenService, publisher})
 
